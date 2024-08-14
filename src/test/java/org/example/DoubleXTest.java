@@ -1,34 +1,32 @@
 package org.example;
 
-/**
- * Given a string, return true if the first instance of "x" in the string is immediately followed by another "x".
- * <p>
- * doubleX("axxbb") → true
- * doubleX("axaxax") → false
- * doubleX("xxxxx") → true
- */
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
 
-public class DoubleX {
-    public boolean doubleX(String str) {
-        // Find the first occurrence of "x"
-        int i = str.indexOf("x");
 
-        // If there is no "x" or "x" is the last character, return false
-        if (i == -1 || i == str.length() - 1) {
-            return false;
-        }
+public class DoubleXTest {
 
-        // Check if the character immediately after the first "x" is also an "x"
-        return str.charAt(i + 1) == 'x';
-    }
-
-    // Main method to test the doubleX function
-    public static void main(String[] args) {
+    @Test
+    public void testDoubleX() {
         DoubleX doubleXChecker = new DoubleX();
 
-        // Test cases to check various scenarios
-        System.out.println(doubleXChecker.doubleX("axxbb")); // true, the first "x" is followed by another "x"
-        System.out.println(doubleXChecker.doubleX("axaxax")); // false, the first "x" is not followed by another "x"
-        System.out.println(doubleXChecker.doubleX("xxxxx")); // true, the first "x" is followed by another "x"
+        // Test case 1: the first "x" is followed by another "x"
+        assertTrue(doubleXChecker.doubleX("axxbb"));
+
+        // Test case 2: the first "x" is not followed by another "x"
+        assertFalse(doubleXChecker.doubleX("axaxax"));
+
+        // Test case 3: the first "x" is followed by another "x" and more "x"s
+        assertTrue(doubleXChecker.doubleX("xxxxx"));
+
+        // Test case 4: no "x" in the string
+        assertFalse(doubleXChecker.doubleX("abc"));
+
+        // Test case 5: only one "x" in the string
+        assertFalse(doubleXChecker.doubleX("ax"));
+
+        // Test case 6: first "x" is at the end of the string
+        assertFalse(doubleXChecker.doubleX("abcx"));
     }
 }
